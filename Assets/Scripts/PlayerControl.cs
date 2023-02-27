@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerControl : MonoBehaviour
 {
     float horizontalMove;
     public float speed;
+
+    
 
     Rigidbody2D myBody;
 
@@ -14,6 +17,8 @@ public class PlayerControl : MonoBehaviour
     public float gravityScale = 5f;
     public float gravityFall = 40f;
     public float jumpLimit = 2f;
+
+    private Vector3 scaleChange;
 
     bool jump = false;
 
@@ -36,7 +41,15 @@ public class PlayerControl : MonoBehaviour
             jump = true;
         }
 
-        if (horizontalMove > 0.2f || horizontalMove < -0.2f)
+        if (horizontalMove > 0) {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (horizontalMove < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (horizontalMove > 0.1f || horizontalMove < -0.1f)
         {
             myAnim.SetBool("walking", true);
 
@@ -71,7 +84,7 @@ public class PlayerControl : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, castDist);
         Debug.DrawRay(transform.position, Vector2.down, Color.red);
 
-        if (hit.collider != null && hit.transform.name == "Ground")
+        if (hit.collider != null && hit.transform.tag == "Ground")
         {
             grounded = true;
         }

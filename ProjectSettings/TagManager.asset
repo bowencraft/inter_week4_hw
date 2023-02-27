@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - FailTrigger
+  - finish1
+  - finish2
   layers:
   - Default
   - TransparentFX

@@ -15,9 +15,18 @@ public class PlayerControl : MonoBehaviour
     public float maxSpeed = 1;
     public float friction = 0.95f;
 
+    public static int health = 3;
+
     public GameObject frontGround;
     public GameObject backGround;
     public GameObject startPoint;
+
+    public GameObject healthStatus;
+
+    public Sprite health1;
+    public Sprite health2;
+    public Sprite health3;
+
 
     //public float exchangeSpeed = 0.01f;
 
@@ -46,6 +55,18 @@ public class PlayerControl : MonoBehaviour
         myBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
         FTBExchange();
+        if (health == 3)
+        {
+            healthStatus.GetComponent<SpriteRenderer>().sprite = health3;
+        }
+        else if (health == 2)
+        {
+            healthStatus.GetComponent<SpriteRenderer>().sprite = health2;
+        }
+        else if (health == 1)
+        {
+            healthStatus.GetComponent<SpriteRenderer>().sprite = health1;
+        }
     }
 
     // Update is called once per frame
@@ -99,6 +120,8 @@ public class PlayerControl : MonoBehaviour
             myAnim.SetBool("walking", false);
 
         }
+
+
     }
 
     private void FixedUpdate()
@@ -192,17 +215,39 @@ public class PlayerControl : MonoBehaviour
         {
             if (collision.gameObject.tag.Equals("FailTrigger"))
             {
+                health--;
+                if (health == 3)
+                {
+                    healthStatus.GetComponent<SpriteRenderer>().sprite = health3;
+                }
+                else if (health == 2)
+                {
+                    healthStatus.GetComponent<SpriteRenderer>().sprite = health2;
+                }
+                else if (health == 1)
+                {
+                    healthStatus.GetComponent<SpriteRenderer>().sprite = health1;
+                }
+
                 Vector3 playerPos = transform.position;
                 playerPos = startPoint.transform.position;
                 transform.position = playerPos;
 
                 ftbStatus = 1;
                 FTBExchange();
-
-                //SceneManager.LoadScene("FailScene");
+                if (health == 0)
+                {
+                    SceneManager.LoadScene("FailScene");
+                    // goto fail scene
+                }
 
             }
-            else if (collision.gameObject.tag.Equals("Finish"))
+            else if (collision.gameObject.tag.Equals("finish1"))
+            {
+                SceneManager.LoadScene("Level2");
+
+            }
+            else if (collision.gameObject.tag.Equals("Finish2"))
             {
 
                 SceneManager.LoadScene("WinScene");
@@ -210,5 +255,9 @@ public class PlayerControl : MonoBehaviour
             }
             //Debug.Log("Start Collide" + collision.collider.gameObject.name);
         }
+    }
+
+    public void resetHealth() {
+        health = 3;
     }
 }

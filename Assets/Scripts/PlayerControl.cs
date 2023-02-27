@@ -89,7 +89,7 @@ public class PlayerControl : MonoBehaviour
         //{
         //}
 
-        if (speed > 0.1f || speed < -0.1f)
+        if (speed > 0.2f || speed < -0.2f)
         {
             myAnim.SetBool("walking", true);
 
@@ -155,15 +155,15 @@ public class PlayerControl : MonoBehaviour
 
             Vector3 frontPos = frontGround.transform.position;
             Vector3 backPos = backGround.transform.position;
-            frontPos.z = -1f;
+            frontPos.z = 1f;
             backPos.z = 0f;
             frontGround.transform.position = frontPos;
             backGround.transform.position = backPos;
 
             frontGround.GetComponent<TilemapCollider2D>().enabled = false;
             backGround.GetComponent<TilemapCollider2D>().enabled = true;
-            frontGround.GetComponent<Tilemap>().color = new Color(150,150,150);
-            backGround.GetComponent<Tilemap>().color = new Color(255, 255, 255);
+            frontGround.GetComponent<Tilemap>().color = new Color(0.4f, 0.4f, 0.4f);
+            backGround.GetComponent<Tilemap>().color = new Color(1, 1, 1);
             //TilemapRenderer renderer = frontGround.GetComponent<TilemapRenderer>();
 
             //frontGround.GetComponent<TilemapRenderer>().sortOrder = order;
@@ -175,14 +175,14 @@ public class PlayerControl : MonoBehaviour
             Vector3 frontPos = frontGround.transform.position;
             Vector3 backPos = backGround.transform.position;
             frontPos.z = 0f;
-            backPos.z = -1f;
+            backPos.z = 1f;
             frontGround.transform.position = frontPos;
             backGround.transform.position = backPos;
 
             frontGround.GetComponent<TilemapCollider2D>().enabled = true;
             backGround.GetComponent<TilemapCollider2D>().enabled = false;
-            frontGround.GetComponent<Tilemap>().color = new Color(255, 255, 255);
-            backGround.GetComponent<Tilemap>().color = new Color(150, 150, 150);
+            frontGround.GetComponent<Tilemap>().color = new Color(1, 1, 1);
+            backGround.GetComponent<Tilemap>().color = new Color(0.4f, 0.4f, 0.4f);
             ftbStatus = 0;
         }
     }
@@ -195,6 +195,9 @@ public class PlayerControl : MonoBehaviour
                 Vector3 playerPos = transform.position;
                 playerPos = startPoint.transform.position;
                 transform.position = playerPos;
+
+                ftbStatus = 1;
+                FTBExchange();
 
                 //SceneManager.LoadScene("FailScene");
 

@@ -247,7 +247,7 @@ public class PlayerControl : MonoBehaviour
                 SceneManager.LoadScene("Level2");
 
             }
-            else if (collision.gameObject.tag.Equals("Finish2"))
+            else if (collision.gameObject.tag.Equals("finish2"))
             {
 
                 SceneManager.LoadScene("WinScene");

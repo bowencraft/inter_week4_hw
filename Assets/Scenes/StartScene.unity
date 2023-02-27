@@ -181,7 +181,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 996265559, guid: 38d7ca0c0944842d2b3215b29006607a, type: 3}
+  m_Sprite: {fileID: 405341446, guid: 38d7ca0c0944842d2b3215b29006607a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49257886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.8, y: 5.94, z: 0}
+  m_LocalPosition: {x: -10.85, y: 4.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,7 +312,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1608347255, guid: 38d7ca0c0944842d2b3215b29006607a, type: 3}
+  m_Sprite: {fileID: 1086685258, guid: 38d7ca0c0944842d2b3215b29006607a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,7 +331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250695172}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.034746, y: 3.898563, z: 0}
+  m_LocalPosition: {x: -10.34, y: 1.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerObject: {fileID: 1972691906}
-  CameraSpeed: 0.01
+  CameraSpeed: 0.05
   CameraOffset: 7
 --- !u!1 &593884316
 GameObject:
@@ -8364,7 +8364,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_Sprite: {fileID: -1457248197, guid: e55ce9820ab394aa09a9bbe66d647cdf, type: 3}
   m_Color: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 1}
   m_FlipX: 0
@@ -8404,7 +8404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  friction: 0.99
+  friction: 0.9
   frontGround: {fileID: 1515275109}
   backGround: {fileID: 1449593140}
   startPoint: {fileID: 756428602}

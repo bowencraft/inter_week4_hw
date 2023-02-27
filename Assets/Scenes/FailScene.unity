@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerObject: {fileID: 1972691906}
-  CameraSpeed: 0.01
+  CameraSpeed: 0.05
   CameraOffset: 7
 --- !u!1 &593884316
 GameObject:
@@ -8404,7 +8404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  friction: 0.99
+  friction: 0.9
   frontGround: {fileID: 1515275109}
   backGround: {fileID: 1449593140}
   startPoint: {fileID: 756428602}

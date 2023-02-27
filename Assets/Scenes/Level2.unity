@@ -5396,7 +5396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  friction: 0.99
+  friction: 0.9
   frontGround: {fileID: 232043375}
   backGround: {fileID: 1861272423}
   startPoint: {fileID: 1542915604}
@@ -5421,7 +5421,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.4408245}
+  m_Offset: {x: 0, y: 1.3922836}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -5432,7 +5432,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.8801472, y: 2.198351}
+  m_Size: {x: 2.8801472, y: 2.2954328}
   m_EdgeRadius: 0
 --- !u!50 &396252851
 Rigidbody2D:
@@ -5495,7 +5495,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1457248197, guid: e55ce9820ab394aa09a9bbe66d647cdf, type: 3}
   m_Color: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 1}
   m_FlipX: 0
@@ -5677,7 +5677,7 @@ GameObject:
   - component: {fileID: 935375329}
   m_Layer: 0
   m_Name: text_4
-  m_TagString: finish1
+  m_TagString: finish2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5919,7 +5919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerObject: {fileID: 396252847}
-  CameraSpeed: 0.01
+  CameraSpeed: 0.05
   CameraOffset: -2
 --- !u!1 &1542915604
 GameObject:

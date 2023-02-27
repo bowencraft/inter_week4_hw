@@ -1,14 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
+using static System.Net.WebRequestMethods;
+using static UnityEngine.Tilemaps.TilemapRenderer;
 
 public class PlayerControl : MonoBehaviour
 {
     float horizontalMove;
-    public float speed;
+    private float speed;
+    public float maxSpeed = 1;
+    public float friction = 0.95f;
 
-    
+    public GameObject frontGround;
+    public GameObject backGround;
+    public GameObject startPoint;
+
+    //public float exchangeSpeed = 0.01f;
+
+    //public float exchangeDepth = 0.5f;
+    //private float frontExchangeDepth = 0f;
+    //private float backExchangeDepth = 0.5f;
+
+    private int ftbStatus = 1;
 
     Rigidbody2D myBody;
 
@@ -18,7 +35,6 @@ public class PlayerControl : MonoBehaviour
     public float gravityFall = 40f;
     public float jumpLimit = 2f;
 
-    private Vector3 scaleChange;
 
     bool jump = false;
 
@@ -29,27 +45,51 @@ public class PlayerControl : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
+        FTBExchange();
     }
 
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxis("Horizontal");
+        if (Input.GetKey(KeyCode.D))
+        {
+            if (speed < maxSpeed)
+            {
+                speed += 1;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            //horizontalMove = Input.GetAxis("Horizontal");
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+
+            if (speed > -maxSpeed)
+            {
+                speed -= 1;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+        }
+        else {
+            speed *= friction;
+        }
+
         //Debug.Log(horizontalMove);
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
         }
-
-        if (horizontalMove > 0) {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        if (horizontalMove < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (Input.GetKeyDown(KeyCode.E)) {
+            FTBExchange();
         }
 
-        if (horizontalMove > 0.1f || horizontalMove < -0.1f)
+        //if (horizontalMove > 0) {
+
+        //}
+        //if (horizontalMove < 0)
+        //{
+        //}
+
+        if (speed > 0.1f || speed < -0.1f)
         {
             myAnim.SetBool("walking", true);
 
@@ -63,7 +103,12 @@ public class PlayerControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float moveSpeed = horizontalMove * speed;
+        //float moveSpeed = horizontalMove * speed;
+        //myBody.velocity = new Vector3(speed, myBody.velocity.y, 0);
+        Vector3 newPos = transform.position;
+        newPos.x += speed * Time.deltaTime;
+        transform.position = newPos;
+        //Debug.Log(speed);
 
         if (jump)
         {
@@ -93,6 +138,74 @@ public class PlayerControl : MonoBehaviour
             grounded = false;
         }
 
-        myBody.velocity = new Vector3(moveSpeed, myBody.velocity.y, 0);
+
+        //Vector3 frontPos = frontGround.transform.position;
+        //Vector3 backPos = backGround.transform.position;
+        ////frontPos.z = Mathf.Lerp(frontPos.z, frontExchangeDepth, exchangeSpeed);
+        ////backPos.z = Mathf.Lerp(backPos.z, backExchangeDepth, exchangeSpeed);
+        //frontGround.transform.position = frontPos;
+        //frontGround.transform.position = backPos;
+    }
+
+    private void FTBExchange()
+    {
+
+        if (ftbStatus == 0)
+        { // front to back
+
+            Vector3 frontPos = frontGround.transform.position;
+            Vector3 backPos = backGround.transform.position;
+            frontPos.z = -1f;
+            backPos.z = 0f;
+            frontGround.transform.position = frontPos;
+            backGround.transform.position = backPos;
+
+            frontGround.GetComponent<TilemapCollider2D>().enabled = false;
+            backGround.GetComponent<TilemapCollider2D>().enabled = true;
+            frontGround.GetComponent<Tilemap>().color = new Color(150,150,150);
+            backGround.GetComponent<Tilemap>().color = new Color(255, 255, 255);
+            //TilemapRenderer renderer = frontGround.GetComponent<TilemapRenderer>();
+
+            //frontGround.GetComponent<TilemapRenderer>().sortOrder = order;
+            ftbStatus = 1;
+
+        }
+        else
+        {
+            Vector3 frontPos = frontGround.transform.position;
+            Vector3 backPos = backGround.transform.position;
+            frontPos.z = 0f;
+            backPos.z = -1f;
+            frontGround.transform.position = frontPos;
+            backGround.transform.position = backPos;
+
+            frontGround.GetComponent<TilemapCollider2D>().enabled = true;
+            backGround.GetComponent<TilemapCollider2D>().enabled = false;
+            frontGround.GetComponent<Tilemap>().color = new Color(255, 255, 255);
+            backGround.GetComponent<Tilemap>().color = new Color(150, 150, 150);
+            ftbStatus = 0;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        {
+            if (collision.gameObject.tag.Equals("FailTrigger"))
+            {
+                Vector3 playerPos = transform.position;
+                playerPos = startPoint.transform.position;
+                transform.position = playerPos;
+
+                //SceneManager.LoadScene("FailScene");
+
+            }
+            else if (collision.gameObject.tag.Equals("Finish"))
+            {
+
+                SceneManager.LoadScene("WinScene");
+
+            }
+            //Debug.Log("Start Collide" + collision.collider.gameObject.name);
+        }
     }
 }
